@@ -2,6 +2,8 @@
 using Spargo.DAO.Interfaces;
 using Spargo.Entities;
 using Spargo.Entities.Options;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -26,8 +28,32 @@ namespace Spargo.DAO
                 AddParameter(GetParameter("@PharmacyPhoneNumber", pharmacy.PhoneNumber, DbType.String), cmd);
                 connection.Open();
                 var pharmacyId = cmd.ExecuteScalar();
-                return (int)pharmacyId;
+                return Decimal.ToInt32((decimal)pharmacyId);
             }
+        }
+
+        public IEnumerable<ProductQuantityResult> GetProductsInPharmacy(int pharmacyId)
+        {
+            List<ProductQuantityResult> PharmacyInformation = new List<ProductQuantityResult>();
+
+            using (var connection  =  new SqlConnection(_connectionStringOptions.Value.DB))
+            {
+
+                SqlCommand cmd = GetCommand(connection, "dbo.GetProductsInPharmacy");
+                AddParameter(GetParameter("@Id", pharmacyId, DbType.Int32), cmd);
+                connection.Open();
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    PharmacyInformation.Add(new ProductQuantityResult()
+                    {
+                        ProductName = reader["ProductName"] as string,
+                        ProductQuantity = (int)reader["ProductQuantity"]
+                    });
+                }
+            }
+            return PharmacyInformation;
         }
 
         public void HardDeletePharmacy(int pharmacyId)
@@ -35,7 +61,7 @@ namespace Spargo.DAO
             using (var connection = new SqlConnection(_connectionStringOptions.Value.DB))
             {
                 SqlCommand cmd = GetCommand(connection, "dbo.HardDeletePharmacy");
-                AddParameter(GetParameter("@id", pharmacyId, DbType.Int32), cmd);
+                AddParameter(GetParameter("@Id", pharmacyId, DbType.Int32), cmd);
                 connection.Open();
                 cmd.ExecuteNonQuery();
             }
@@ -46,7 +72,7 @@ namespace Spargo.DAO
             using (var connection = new SqlConnection(_connectionStringOptions.Value.DB))
             {
                 SqlCommand cmd = GetCommand(connection, "dbo.SoftDeletePharmacy");
-                AddParameter(GetParameter("@id", pharmacyId, DbType.Int32), cmd);
+                AddParameter(GetParameter("@Id", pharmacyId, DbType.Int32), cmd);
                 connection.Open();
                 cmd.ExecuteNonQuery();
             }

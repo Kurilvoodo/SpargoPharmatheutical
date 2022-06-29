@@ -1,0 +1,7 @@
+CREATE OR ALTER PROCEDURE HardDeleteProduct
+@Id INT
+AS
+BEGIN
+DELETE FROM Stock WHERE ProductId = @Id
+DELETE FROM Product WHERE id = @Id
+END

@@ -6,6 +6,7 @@ using Spargo.BLL.Services;
 using Spargo.DAO;
 using Spargo.DAO.Interfaces;
 using Spargo.Entities.Options;
+using SpargoPharmaetheuticalTestProject.TestTools;
 using System;
 using System.IO;
 
@@ -16,8 +17,8 @@ namespace SpargoPharmaetheuticalTestProject
         private static void Main(string[] args)
         {
             var builder = new ConfigurationBuilder();
-            var configuration = builder.Build();
             BuildConfig(builder);
+            var configuration = builder.Build();
 
             var host = Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) =>
@@ -36,7 +37,8 @@ namespace SpargoPharmaetheuticalTestProject
                 })
                 .Build();
 
-            var ProductService = ActivatorUtilities.CreateInstance<ProductService>(host.Services);
+            ConsoleStartup.Init(host);
+            Console.ReadLine();
         }
 
         private static void BuildConfig(IConfigurationBuilder builder)

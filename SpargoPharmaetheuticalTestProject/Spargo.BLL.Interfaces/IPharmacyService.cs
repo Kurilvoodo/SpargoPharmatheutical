@@ -1,4 +1,5 @@
 ﻿using Spargo.Entities;
+using System.Collections.Generic;
 
 namespace Spargo.BLL.Interfaces
 {
@@ -9,5 +10,7 @@ namespace Spargo.BLL.Interfaces
         void SoftDeletePharmacy(int pharmacyId);
 
         void HarddDeletePharmacy(int pharmacyId);
+
+        IEnumerable<ProductQuantityResult> GetProductsInPharmacy(int pharmacyId);
     }
 }

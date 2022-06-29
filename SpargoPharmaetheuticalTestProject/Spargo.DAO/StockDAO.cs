@@ -2,6 +2,7 @@
 using Spargo.DAO.Interfaces;
 using Spargo.Entities;
 using Spargo.Entities.Options;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -26,7 +27,7 @@ namespace Spargo.DAO
                 AddParameter(GetParameter("@StockNumber", stock.StockNumber, DbType.Int32), cmd);
                 connection.Open();
                 var stockId = cmd.ExecuteScalar();
-                return (int)stockId;
+                return Decimal.ToInt32((decimal)stockId);
             }
         }
 
@@ -35,7 +36,7 @@ namespace Spargo.DAO
             using (var connection = new SqlConnection(_connectionStringOptions.Value.DB))
             {
                 SqlCommand cmd = GetCommand(connection, "dbo.HardDeleteStock");
-                AddParameter(GetParameter("@id", stockId, DbType.Int32), cmd);
+                AddParameter(GetParameter("@Id", stockId, DbType.Int32), cmd);
                 connection.Open();
                 cmd.ExecuteNonQuery();
             }
@@ -46,7 +47,7 @@ namespace Spargo.DAO
             using (var connection = new SqlConnection(_connectionStringOptions.Value.DB))
             {
                 SqlCommand cmd = GetCommand(connection, "dbo.SoftDeleteStock");
-                AddParameter(GetParameter("@id", stockId, DbType.Int32), cmd);
+                AddParameter(GetParameter("@Id", stockId, DbType.Int32), cmd);
                 connection.Open();
                 cmd.ExecuteNonQuery();
             }

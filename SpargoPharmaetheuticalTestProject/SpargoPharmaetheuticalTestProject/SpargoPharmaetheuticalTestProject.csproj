@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -16,14 +16,6 @@
     <ProjectReference Include="..\Spargo.DAO.Interfaces\Spargo.DAO.Interfaces.csproj" />
     <ProjectReference Include="..\Spargo.DAO\Spargo.DAO.csproj" />
     <ProjectReference Include="..\Spargo.Entities\Spargo.Entities.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>appsettings.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <ItemGroup>

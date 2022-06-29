@@ -2,6 +2,7 @@
 using Spargo.DAO.Interfaces;
 using Spargo.Entities;
 using Spargo.Entities.Options;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -20,11 +21,11 @@ namespace Spargo.DAO
         {
             using (var connection = new SqlConnection(_connectionStringOptions.Value.DB))
             {
-                SqlCommand cmd = GetCommand(connection, "dbo.AddPharmacy");
+                SqlCommand cmd = GetCommand(connection, "dbo.AddProduct");
                 AddParameter(GetParameter("@ProductName", product.Name, DbType.String), cmd);
                 connection.Open();
                 var productId = cmd.ExecuteScalar();
-                return (int)productId;
+                return Decimal.ToInt32((decimal)productId);
             }
         }
 
@@ -33,7 +34,7 @@ namespace Spargo.DAO
             using (var connection = new SqlConnection(_connectionStringOptions.Value.DB))
             {
                 SqlCommand cmd = GetCommand(connection, "dbo.HardDeleteProduct");
-                AddParameter(GetParameter("@id", productId, DbType.Int32), cmd);
+                AddParameter(GetParameter("@Id", productId, DbType.Int32), cmd);
                 connection.Open();
                 cmd.ExecuteNonQuery();
             }
@@ -44,7 +45,7 @@ namespace Spargo.DAO
             using (var connection = new SqlConnection(_connectionStringOptions.Value.DB))
             {
                 SqlCommand cmd = GetCommand(connection, "dbo.SoftDeleteProduct");
-                AddParameter(GetParameter("@id", productId, DbType.Int32), cmd);
+                AddParameter(GetParameter("@Id", productId, DbType.Int32), cmd);
                 connection.Open();
                 cmd.ExecuteNonQuery();
             }

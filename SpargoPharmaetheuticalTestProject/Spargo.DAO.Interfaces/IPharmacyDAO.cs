@@ -1,4 +1,5 @@
 ﻿using Spargo.Entities;
+using System.Collections.Generic;
 
 namespace Spargo.DAO.Interfaces
 {
@@ -9,5 +10,6 @@ namespace Spargo.DAO.Interfaces
         void SoftDeletePharmacy(int pharmacyId);
 
         void HardDeletePharmacy(int pharmacyId);
+        IEnumerable<ProductQuantityResult> GetProductsInPharmacy(int pharmacyId);
     }
 }

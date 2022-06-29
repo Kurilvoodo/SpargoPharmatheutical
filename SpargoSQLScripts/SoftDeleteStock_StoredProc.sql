@@ -1,0 +1,7 @@
+CREATE OR ALTER PROCEDURE SoftDeleteStock
+@Id INT
+AS
+BEGIN
+UPDATE Stock
+SET IsDeleted = 1 WHERE id = @Id
+END

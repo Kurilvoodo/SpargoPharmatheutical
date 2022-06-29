@@ -1,6 +1,7 @@
 ﻿using Spargo.BLL.Interfaces;
 using Spargo.DAO.Interfaces;
 using Spargo.Entities;
+using System.Collections.Generic;
 
 namespace Spargo.BLL.Services
 {
@@ -16,6 +17,11 @@ namespace Spargo.BLL.Services
         public int AddPharmacy(Pharmacy pharmacy)
         {
             return _pharmacyDAO.AddPharmacy(pharmacy);
+        }
+
+        public IEnumerable<ProductQuantityResult> GetProductsInPharmacy(int pharmacyId)
+        {
+            return _pharmacyDAO.GetProductsInPharmacy(pharmacyId);
         }
 
         public void HarddDeletePharmacy(int pharmacyId)
