@@ -10,6 +10,7 @@ namespace Spargo.DAO.Interfaces
         void SoftDeletePharmacy(int pharmacyId);
 
         void HardDeletePharmacy(int pharmacyId);
+
         IEnumerable<ProductQuantityResult> GetProductsInPharmacy(int pharmacyId);
     }
 }

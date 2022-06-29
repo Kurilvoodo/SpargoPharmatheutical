@@ -36,9 +36,8 @@ namespace Spargo.DAO
         {
             List<ProductQuantityResult> PharmacyInformation = new List<ProductQuantityResult>();
 
-            using (var connection  =  new SqlConnection(_connectionStringOptions.Value.DB))
+            using (var connection = new SqlConnection(_connectionStringOptions.Value.DB))
             {
-
                 SqlCommand cmd = GetCommand(connection, "dbo.GetProductsInPharmacy");
                 AddParameter(GetParameter("@Id", pharmacyId, DbType.Int32), cmd);
                 connection.Open();

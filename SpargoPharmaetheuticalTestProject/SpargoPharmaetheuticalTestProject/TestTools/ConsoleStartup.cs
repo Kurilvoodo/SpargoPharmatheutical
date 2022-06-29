@@ -3,8 +3,6 @@ using Microsoft.Extensions.Hosting;
 using Spargo.BLL.Services;
 using Spargo.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SpargoPharmaetheuticalTestProject.TestTools
 {
@@ -17,7 +15,7 @@ namespace SpargoPharmaetheuticalTestProject.TestTools
             var stockService = ActivatorUtilities.CreateInstance<StockService>(host.Services);
             var pharmacyService = ActivatorUtilities.CreateInstance<PharmacyService>(host.Services);
 
-            //Add Products 
+            //Add Products
             int firstDrug = productService.AddProduct(new Product() { Name = "Ибупрофен" });
             int secondDrug = productService.AddProduct(new Product() { Name = "Пенталгин" });
             int thirdDrug = productService.AddProduct(new Product() { Name = "Триазаверин" });
@@ -65,7 +63,7 @@ namespace SpargoPharmaetheuticalTestProject.TestTools
             int secondStoreHouseStock_Two = stockService.AddStock(new Stock() { ProductId = thirdDrug, StockNumber = 4, StoreHouseId = firstPharmacy2StoreHouse });
 
             //Stocks for Second Pharmacy That won't be checked
-            int thirdStoreHouseStock_One = stockService.AddStock(new Stock() { ProductId = firstDrug, StockNumber=20, StoreHouseId = secondPharmacy1StoreHouse });
+            int thirdStoreHouseStock_One = stockService.AddStock(new Stock() { ProductId = firstDrug, StockNumber = 20, StoreHouseId = secondPharmacy1StoreHouse });
             int thirdStoreHouseStock_Two = stockService.AddStock(new Stock() { ProductId = secondDrug, StockNumber = 20, StoreHouseId = secondPharmacy1StoreHouse });
             int thirdStoreHouseStock_Three = stockService.AddStock(new Stock() { ProductId = thirdDrug, StockNumber = 20, StoreHouseId = secondPharmacy1StoreHouse });
 
@@ -76,7 +74,6 @@ namespace SpargoPharmaetheuticalTestProject.TestTools
             {
                 Console.WriteLine($"{item.ProductName} - {item.ProductQuantity}");
             }
-
         }
     }
 }
